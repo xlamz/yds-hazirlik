@@ -8522,9 +8522,16 @@ const OWNER = {
 };
 // Typing "Ata" opens Ata's own profile; typing "admin" opens a test profile with every lock removed.
 const loginKey=name=>name.trim().toLocaleLowerCase('tr-TR').replace(/ı/g,'i');
-function isOwnerLogin(name){ return loginKey(name)==='ata'; }
-function isAdminLogin(name){ return loginKey(name)==='admin'; }
-function isAdmin(){ return !!state?.profile?.admin; }
+// Ata 2026-10-19: the "Ata" and "admin" names only work when signed in with Ata's own account.
+// Local-only copies (no sign-in, e.g. the private claude.ai page) keep the old behaviour.
+const OWNER_MAIL='atameric.ozen@gmail.com';
+function ownerAccount(){
+  if(typeof YDSSync==='undefined' || !YDSSync.enabled()) return true;
+  const u=YDSSync.user(); return !!u && (u.email||'').toLowerCase()===OWNER_MAIL;
+}
+function isOwnerLogin(name){ return loginKey(name)==='ata' && ownerAccount(); }
+function isAdminLogin(name){ return loginKey(name)==='admin' && ownerAccount(); }
+function isAdmin(){ return !!state?.profile?.admin && ownerAccount(); }
 function adminLogin(){
   let entry=profiles.list.find(p=>p.admin);
   if(!entry){ entry={ id:uid(), name:'Admin', color:COLORS[profiles.list.length%COLORS.length], created:now(), admin:true }; profiles.list.push(entry); }
