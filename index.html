@@ -25238,7 +25238,10 @@ function nextVocab(){
   render(); setTimeout(()=>{ const i=document.querySelector('#vin'); if(i) i.focus(); },30);
 }
 function makeRecognition(id){
-  const w=word(id); const others=shuffle(allWords().filter(x=>x.id!==id));
+  // wrong options: studied words of the same part of speech first, so the answer is not 'the only word I know'
+  const w=word(id), k=typeof posKey==='function'?posKey(w):'', seenW=x=>state.lm&&state.lm[x.id] || state.vocab[x.id]?.last, tier=x=>(seenW(x)?0:2)+(k&&posKey(x)===k?0:1);
+  const myTr=new Set(String(w.tr||'').toLocaleLowerCase('tr').split(/\s*[,;]\s*/)), syn=new Set((w.syn||[]).map(norm));
+  const others=shuffle(allWords().filter(x=>x.id!==id && x.tr && !syn.has(norm(x.w)) && !String(x.tr).toLocaleLowerCase('tr').split(/\s*[,;]\s*/).some(y=>myTr.has(y)))).sort((a,b)=>tier(a)-tier(b));
   const useSyn = w.syn && w.syn.length && Math.random()<0.3;
   if(useSyn){
     const opts=[w.syn[0]]; for(const o of others){ const s=o.syn&&o.syn[0]; if(s && !opts.includes(s) && !(w.syn||[]).includes(s)) opts.push(s); if(opts.length===4) break; }
