@@ -681,9 +681,10 @@ body.gate .side{display:none}
 .mel small{display:block;font-size:12px;font-weight:400;color:var(--side-mut)}
 .side .who{margin:0;min-height:36px;width:36px;padding:0;border:0;background:transparent;color:var(--side-mut);font-size:16px}
 .side .who:hover{color:#fff;background:var(--side-on)}
-main{flex:1;min-width:0;max-width:1180px;margin:0;padding:26px 30px 80px}
-main:has(.rwrap){max-width:1240px}
-main>:not(.htop,.g3,.g2,.note,.crumb){max-width:880px}
+/* pages keep their reading width (880px), centred in the space right of the sidebar; home and reading use more */
+main{flex:1;min-width:0;max-width:none;margin:0;padding:26px 30px 80px;padding-inline:max(30px, calc((100vw - 236px - 880px) / 2))}
+main:has(>.htop){padding-inline:max(30px, calc((100vw - 236px - 1600px) / 2))}
+main:has(.rwrap){padding-inline:max(30px, calc((100vw - 236px - 1240px) / 2))}
 .hud{top:16px}
 .rwrap .passage{top:16px}
 @media (max-width:980px){
@@ -694,8 +695,7 @@ main>:not(.htop,.g3,.g2,.note,.crumb){max-width:880px}
   .nav{min-height:38px;padding:0 10px;font-size:14px;white-space:nowrap;gap:6px}.nav svg{width:16px;height:16px}
   .side .grow,.tog,.mel>span{display:none}
   .me{padding:0;background:none}.mel b{width:34px;height:34px}
-  main{padding:18px 16px 80px}
-  main>*{max-width:none}
+  main,main:has(>.htop),main:has(.rwrap){padding:18px 16px 80px}
 }
 @media (max-width:560px){ .nav span{display:none}.nav.on span{display:inline}.side .who{display:none} }
 /* home */
@@ -28157,7 +28157,7 @@ function pagePlan(){
   const dot=(k)=>`<div class="hdot ${k}">${AREA_ICO[k]||AREA_ICO.grammar}</div>`;
   const doneRows=q.filter(z=>z.done).map(z=>`<div class="item done">${dot('done')}<div class="t"><span>${esc(z.title)}</span><small>Günlük görev tamam · +${QUEST_XP} XP</small></div></div>`).join('');
   const rows=rest.map(t=>`<div class="item">${dot(t.area)}<div class="t"><span>${esc(t.title)}</span><small>${esc(t.d)}</small></div>${hTaskBtn(t,'go','Çalış')}</div>`).join('');
-  const mine=state.mywords.slice(-6).reverse();
+  const mine=state.mywords.slice(-12).reverse();
   return `<div class="htop"><div><small>${new Date().toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'})}</small><h1>${hello}</h1></div>
     <div class="hpills"><span class="hpill fire">${ICO.fire} ${streak()} günlük seri</span><span class="hpill">${ICO.star} ${totalXP()} XP</span></div></div>
   ${!p.levelChoice?`<div class="card note small">Seviyeni henüz belirlemedin. <a href="#/level">Seviye testine gir</a> ya da <a href="#/profile">Profil</a> sayfasından testsiz devam et.</div>`:''}
