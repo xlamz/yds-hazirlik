@@ -25165,7 +25165,9 @@ const VKEYNAME = { rec:'Tanıma (çoktan seçmeli)', gui:'Yönlendirmeli hatırl
 function allWords(){ return VOCAB.concat(state.custom); }
 let _wordIdx=null;
 function word(id){ _wordIdx ||= new Map(VOCAB.map(w=>[w.id,w])); return _wordIdx.get(id) || state.custom.find(w=>w.id===id); }
-function clozeParts(w, c){ const ex=(c&&c.ex)||w.ex||''; const m=ex.match(/\[(.+?)\]/); return m ? { ans:m[1], text:ex.replace(/\[(.+?)\]/,'_____'), full:ex.replace(/\[(.+?)\]/,'<b>$1</b>') } : { ans:w.w, text:'', full:esc(ex) }; }
+function clozeParts(w, c){ let ex=(c&&c.ex)||w.ex||'';
+  // a saved sentence that still carries another question's blank is filled back in (learn.js fullSentence), never shown with two blanks
+  try{ if(CTX_BLANK.test(ex.replace(/\[.+?\]/g,''))){ const t=(ex.match(/\[(.+?)\]/)||[])[1], f=fullSentence(ex.replace(/\[(.+?)\]/g,'$1')); if(t && f && !CTX_BLANK.test(f)) ex=markCtx(f, t)||ex; } }catch(e){} const m=ex.match(/\[(.+?)\]/); return m ? { ans:m[1], text:ex.replace(/\[(.+?)\]/,'_____'), full:ex.replace(/\[(.+?)\]/,'<b>$1</b>') } : { ans:w.w, text:'', full:esc(ex) }; }
 // Each word has its main example plus extra ones (w.exs); cloze questions rotate through them so the sentence is not memorised.
 function pickEx(w){ const list=(w.sid ? [...(w.exs||[]), w.ex] : [w.ex, ...(w.exs||[])]).filter(x=>x && /\[.+?\]/.test(x)); if(list.length<2) return w.ex||'';
   const r=state.vocab[w.id], n=r ? Object.values(r.stats||{}).reduce((a,s)=>a+(s.a||0),0) : 0; return list[n % list.length]; }
