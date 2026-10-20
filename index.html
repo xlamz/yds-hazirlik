@@ -25118,7 +25118,7 @@ function migrate(s){
   return s;
 }
 function load(id){
-  try { const raw=localStorage.getItem(stateKey(id)); state = raw ? migrate(JSON.parse(raw)) : defaultState(); _lex=null; migrateUnknown(); if(typeof fixFormWords==='function') fixFormWords(); }
+  try { const raw=localStorage.getItem(stateKey(id)); state = raw ? migrate(JSON.parse(raw)) : defaultState(); _lex=null; migrateUnknown(); if(typeof fixFormWords==='function') fixFormWords(); if(typeof fixCustomBlanks==='function') fixCustomBlanks(); }
   catch(e){ state=defaultState(); toast('Tarayıcı depolaması okunamadı. İlerleme kaydedilmeyebilir; düzenli olarak dışa aktar.'); }
 }
 function save(){
@@ -25879,7 +25879,7 @@ function doImport(file){
     if(!next.profile.name) next.profile.name=prev.profile.name;
     state=next; _lex=null;
     if(!save()){ state=prev; _lex=null; save(); toast('Yedek kaydedilemedi. Mevcut ilerlemen değişmedi.'); render(); return; }
-    try{ migrateUnknown(); if(typeof fixFormWords==='function') fixFormWords(); }catch(e){}
+    try{ migrateUnknown(); if(typeof fixFormWords==='function') fixFormWords(); if(typeof fixCustomBlanks==='function') fixCustomBlanks(); }catch(e){}
     toast('Yedek yüklendi. Ayarlar > Yedek bölümünden geri alabilirsin.'); render(); };
   fr.onerror=()=>toast('Dosya okunamadı.');
   fr.readAsText(file);
@@ -26201,17 +26201,37 @@ const ICO_HEART = '<svg width="20" height="20" viewBox="0 0 24 24" fill="current
 function myWordFor(w, tok){ const k=norm(w?w.w:tok); return k ? state.mywords.find(m=>norm(m.w)===k || (w && m.wid===w.id)) : null; }
 function markCtx(ctx, tok){ if(!ctx||!tok) return ''; const re=new RegExp('\\b('+tok.replace(/[^A-Za-z'-]/g,'')+')\\b','i'); return re.test(ctx) ? ctx.replace(re,'[$1]') : ''; }
 function ctxFromParas(paras, tok){ const re=new RegExp('\\b'+tok.replace(/[^A-Za-z'-]/g,'')+'\\b','i'); for(const p of paras||[]){ if(!re.test(p)) continue; const ss=p.split(/(?<=[.!?])\s+/); return ss.find(x=>re.test(x))||''; } return ''; }
+// A sentence tapped inside a cloze question still has that question's blank ("Poor _____ continues to …"). Saved as an
+// example it would give a question with two blanks, so the blank is filled back in: with the open question's answer,
+// or with the original sentence found among the word examples. If neither works the sentence is not used for cloze.
+const CTX_BLANK=/_{3,}|-{3,}|\.{4,}|…{2,}/;
+function fullSentence(ctx){
+  if(!ctx || !CTX_BLANK.test(ctx)) return ctx;
+  const parts=ctx.split(/_{3,}|-{3,}|\.{4,}|…{2,}/).map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+  const re=new RegExp('^'+parts.join('(.+?)')+'$', 'i');
+  for(const x of allWords()) for(const e of [x.ex, ...(x.exs||[])]){ if(!e) continue; const plain=String(e).replace(/\[(.+?)\]/g,'$1'); if(re.test(plain)) return plain; }
+  return ctx;
+}
+function fillCtx(ctx){
+  if(!ctx || !CTX_BLANK.test(ctx)) return ctx;
+  const c=S && S.kind==='lesson' && S.cur; if(c && ['cloze','ctype'].includes(c.type) && c.id){ const a=clozeParts(word(c.id), c).ans; if(a) ctx=ctx.replace(/_{3,}/, a); }
+  return fullSentence(ctx);
+}
+// Older saved words: repair examples that kept a blank.
+function fixCustomBlanks(){ for(const c of state.custom||[]){ if(c.ex && CTX_BLANK.test(c.ex.replace(/\[(.+?)\]/g,''))){ const f=fullSentence(c.ex.replace(/\[(.+?)\]/g,'$1')); const tok=(c.ex.match(/\[(.+?)\]/)||[])[1]; if(f && !CTX_BLANK.test(f) && tok){ c.ex=markCtx(f, tok)||c.ex; } } }
+  for(const m of state.mywords||[]) if(m.ctx && CTX_BLANK.test(m.ctx)) m.ctx=fullSentence(m.ctx); }
 function srcLabel(){ if(!S) return ''; if(S.kind==='reading') return S.tx.title; if(S.kind==='mcq'||S.kind==='summary') return S.title||''; return ''; }
 // Adds a word to the list and to the deck. Words outside the curated dictionary get their own card, with the
 // sentence they were found in as the example (so guided recall later asks for it in that real sentence).
 function addMyWord(tok, ctx, tr, src){
   tok=String(tok||'').trim(); if(!tok) return null;
+  ctx=fillCtx(ctx);
   let w=lookupWord(tok);
   const have=myWordFor(w, tok); if(have) return have;
   if(!w || (w.gloss && !w.custom)){
     const base = w ? w.w : tok.toLowerCase();
     const id = w ? w.id : 'u_'+norm(base).replace(/ /g,'_')+'_'+uid().slice(0,4);
-    if(!state.custom.some(c=>c.id===id)) state.custom.push({ id, w:base, pos:w?.pos||'', tr: tr || w?.tr || '', def:'', ex:markCtx(ctx, tok)||markCtx(ctx, base), col:[], fam:[], syn:[], ant:[], alt:[], custom:true, gloss:!!w });
+    if(!state.custom.some(c=>c.id===id)) state.custom.push({ id, w:base, pos:w?.pos||'', tr: tr || w?.tr || '', def:'', ex:CTX_BLANK.test(ctx||'')?'':(markCtx(ctx, tok)||markCtx(ctx, base)), col:[], fam:[], syn:[], ant:[], alt:[], custom:true, gloss:!!w });
     _lex=null; w=word(id);
   } else if(tr && w.custom){ w.tr=tr; }
   const m={ id:uid(), wid:w.id, w:w.w, tok, ctx:ctx||'', src:src||srcLabel(), date:now() };
@@ -26301,9 +26321,9 @@ function pickLessonWords(onlyMine){
 
 // ---------- exercises ----------
 // intro · en2tr · tr2en · listen · cloze (choose) · type (Turkish → English) · ctype (sentence, typed) · match
-function shortTr(tr){ const p=String(tr||'').split(/\s*[,;]\s*/).filter(Boolean); return p.slice(0,3).join(', '); }
+function shortTr(tr){ const seen=new Set(), p=String(tr||'').split(/\s*[,;]\s*/).filter(x=>{ const k=x.toLocaleLowerCase('tr'); if(!x||seen.has(k)) return false; seen.add(k); return true; }); return p.slice(0,3).join(', '); }
 function posKey(w){ const p=String(w.dpos||w.pos||'').toLowerCase(); return /^v/.test(p)?'v':/^n/.test(p)?'n':/^adj|^a\b|^a\./.test(p)?'a':/^adv/.test(p)?'r':''; }
-function hasCloze(w){ return /\[.+?\]/.test(w.ex||''); }
+function hasCloze(w){ const e=w.ex||''; return /\[.+?\]/.test(e) && !CTX_BLANK.test(e.replace(/\[(.+?)\]/g,'')); }
 // Grammatical shape of a cloze answer compared with the headword: 's', 'ed', 'ing' or '' (base form).
 function formShape(ans, base){ const a=String(ans).toLowerCase().split(' ')[0], b=String(base).toLowerCase().split(' ')[0];
   if(a===b) return ''; if(a.endsWith('ing')) return 'ing'; if(a.endsWith('ed') || (typeof IRREG!=='undefined' && IRREG[a]===b && !/s$/.test(a))) return 'ed'; if(a.endsWith('s')) return 's'; return ''; }
