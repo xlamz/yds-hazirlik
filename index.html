@@ -8,12 +8,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="YDS">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#F1F6EA">
+<meta name="theme-color" content="#12301F">
 <title>YDS Hazırlık</title>
 <!-- theme font (see theme.css --font); falls back to system fonts offline -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    THEME — "Macera Haritası" (Adventure Map)
@@ -23,25 +23,25 @@
    ============================================================ */
 :root{
   /* type */
-  --font:'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;  /* UI and headings */
+  --font:'Lexend', system-ui, -apple-system, 'Segoe UI', sans-serif;  /* UI and headings */
   --font-read:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;          /* long reading passages and questions */
 
   /* shape */
-  --w-head:800;       /* heading weight for the font above */
-  --radius:18px;      /* cards and panels */
-  --radius-sm:12px;   /* buttons, inputs, small tiles */
+  --w-head:700;       /* heading weight for the font above */
+  --radius:24px;      /* cards and panels */
+  --radius-sm:14px;   /* buttons, inputs, small tiles */
   --depth:4px;        /* bottom edge that makes buttons look pressable; 0 = flat */
 
   /* colours (light) */
-  --bg:#F1F6EA;          /* page ground */
-  --card:#FFFFFF;        /* panels */
-  --text:#1E2A1A;        /* ink */
-  --muted:#4E5B48;       /* secondary text */
-  --line:#D3DDC8;        /* outlines of quiet controls */
-  --accent:#2F7D46;      /* brand green: links, selection, progress */
-  --accent-soft:#E1EFDD;
-  --cta:#FF8A1F;         /* the main action (Çalış), XP */
-  --cta-deep:#C25E00;    /* its pressable edge */
+  --bg:#E6E9E1;          /* page ground */
+  --card:#F3F5EF;        /* panels */
+  --text:#18211B;        /* ink */
+  --muted:#55605A;       /* secondary text */
+  --line:#D3D9CD;        /* outlines of quiet controls */
+  --accent:#1F6E44;      /* brand green: links, selection, progress */
+  --accent-soft:#DCE9DF;
+  --cta:#FF9A3D;         /* the main action (Çalış), XP */
+  --cta-deep:#C9691A;    /* its pressable edge */
   --cta-ink:#2A1400;     /* text on --cta */
   --cta-soft:#FFE7D1;
   --done:#3BAA5C;        /* finished node on the map */
@@ -56,21 +56,31 @@
   /* motion */
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --ease-out:cubic-bezier(.22,1,.36,1);
-  --page-pattern:radial-gradient(circle at 1px 1px, rgba(47,125,70,.09) 1.2px, transparent 0) 0 0/22px 22px;
+  --page-pattern:none;
+  /* C7 layout (sidebar, hero, plan rows) */
+  --side:#12301F; --side-ink:#DCEBE1; --side-mut:#A9C7B4; --side-on:#1F4A31; --side-ico:#5E8A6E; --side-card:#1A3D28;
+  --row:#E9ECE4; --track:#DDE2D8; --blue:#3E86C6; --hero:#1F5A3A; --hero-mut:#B9DEC6; --hero-sub:#D2E9DA; --rev:#12301F;
+  --next:#FCE6D2; --next-sub:#5C3A1E; --chip:#E6E9E1; --go-ink:#fff;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#131A12; --card:#1D261B; --text:#E8F0E2; --muted:#A8B69F; --line:#34402F;
-    --accent:#72CF8F; --accent-soft:#22382A; --cta:#FF9A3D; --cta-deep:#B35400; --cta-ink:#2A1400; --cta-soft:#3F2A17;
+    --bg:#0F1712; --card:#1A2620; --text:#E7EFE9; --muted:#9FB2A5; --line:#2E3E35;
+    --accent:#5CC58A; --accent-soft:#1F3A2A; --cta:#FF9A3D; --cta-deep:#B35400; --cta-ink:#2A1400; --cta-soft:#3F2A17;
     --done:#3BAA5C; --done-deep:#256F3B; --ok:#5CC58A; --ok-soft:#1B3326; --bad:#EF7D7D; --bad-soft:#3A2224; --warn:#F0A65A;
-    --page-pattern:radial-gradient(circle at 1px 1px, rgba(114,207,143,.07) 1.2px, transparent 0) 0 0/22px 22px;
+    --page-pattern:none;
+    --side:#131D17; --side-ink:#E7EFE9; --side-mut:#9FB2A5; --side-on:#1F3A2A; --side-ico:#4E6B58; --side-card:#1A2620;
+    --row:#22302A; --track:#2A3A31; --blue:#6FB0E8; --hero:#1D4430; --hero-mut:#A9D3B8; --hero-sub:#CFE5D7; --rev:#23392B;
+    --next:#3A2A1A; --next-sub:#E3C9AF; --chip:#24332B; --go-ink:#0B2416;
   }
 }
 :root[data-theme="dark"]{
-    --bg:#131A12; --card:#1D261B; --text:#E8F0E2; --muted:#A8B69F; --line:#34402F;
-    --accent:#72CF8F; --accent-soft:#22382A; --cta:#FF9A3D; --cta-deep:#B35400; --cta-ink:#2A1400; --cta-soft:#3F2A17;
+    --bg:#0F1712; --card:#1A2620; --text:#E7EFE9; --muted:#9FB2A5; --line:#2E3E35;
+    --accent:#5CC58A; --accent-soft:#1F3A2A; --cta:#FF9A3D; --cta-deep:#B35400; --cta-ink:#2A1400; --cta-soft:#3F2A17;
     --done:#3BAA5C; --done-deep:#256F3B; --ok:#5CC58A; --ok-soft:#1B3326; --bad:#EF7D7D; --bad-soft:#3A2224; --warn:#F0A65A;
-    --page-pattern:radial-gradient(circle at 1px 1px, rgba(114,207,143,.07) 1.2px, transparent 0) 0 0/22px 22px;
+    --page-pattern:none;
+    --side:#131D17; --side-ink:#E7EFE9; --side-mut:#9FB2A5; --side-on:#1F3A2A; --side-ico:#4E6B58; --side-card:#1A2620;
+    --row:#22302A; --track:#2A3A31; --blue:#6FB0E8; --hero:#1D4430; --hero-mut:#A9D3B8; --hero-sub:#CFE5D7; --rev:#23392B;
+    --next:#3A2A1A; --next-sub:#E3C9AF; --chip:#24332B; --go-ink:#0B2416;
 }
 
 :root{color-scheme:light dark} :root[data-theme="light"]{color-scheme:light} :root[data-theme="dark"]{color-scheme:dark}
@@ -643,15 +653,143 @@ a,button,.sbtn,.opt,.chipnav{touch-action:manipulation}
 .owlpop.on{bottom:calc(10px + env(safe-area-inset-bottom))}
 .spbar{bottom:calc(10px + env(safe-area-inset-bottom))}
 @media (max-width:700px){ .hud{top:auto;right:auto;left:12px;bottom:calc(12px + env(safe-area-inset-bottom))} }
+/* ============================================================
+   C7 layout (2026-10-20): left sidebar, home hero with the 3D owl, plan rows. Colours in theme.css.
+   ============================================================ */
+body{background:var(--bg)}
+.app{min-height:100vh;min-height:100dvh;display:flex}
+body.gate .side{display:none}
+.side{width:236px;flex-shrink:0;background:var(--side);color:var(--side-ink);display:flex;flex-direction:column;gap:4px;padding:22px 14px;position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;z-index:5}
+.side .brand{display:flex;align-items:center;gap:10px;padding:0 10px 20px;font-size:18px;font-weight:700;color:#fff;text-decoration:none}
+.side .brand .owl{width:40px;height:40px;object-fit:contain}
+.navs{display:flex;flex-direction:column;gap:4px}
+.nav{display:flex;align-items:center;gap:12px;min-height:46px;padding:0 14px;border-radius:14px;color:var(--side-mut);text-decoration:none;font-weight:500;transition:background .15s,color .15s}
+.nav svg{fill:var(--side-ico);flex-shrink:0;transition:fill .15s}
+.nav:hover{background:color-mix(in srgb,var(--side-on) 60%,transparent);color:#fff}
+.nav.on{background:var(--side-on);color:#fff;font-weight:600}.nav.on svg{fill:var(--cta)}
+.side .grow{flex-grow:1}
+.tog{display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:0 10px 10px;min-height:36px;font-size:13px;color:var(--side-mut);background:none;border:0;font-weight:500}
+.tog:hover{border:0;color:#fff}
+.tog .sw{width:34px;height:20px;border-radius:99px;background:#2C5A40;display:flex;align-items:center;padding:2px;transition:background .2s}
+.tog .sw i{width:16px;height:16px;border-radius:50%;background:#DCEBE1;transition:transform .2s}
+.tog.on .sw{background:#5CC58A}.tog.on .sw i{transform:translateX(14px);background:#0F1712}
+.me{display:flex;align-items:center;gap:6px;padding:8px;border-radius:16px;background:var(--side-card)}
+.mel{display:flex;align-items:center;gap:10px;flex:1;min-width:0;color:#fff;text-decoration:none;font-weight:600}
+.mel>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mel b{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;overflow:hidden;color:#fff;font-size:15px}
+.mel b svg,.mel b img{width:100%;height:100%}
+.mel small{display:block;font-size:12px;font-weight:400;color:var(--side-mut)}
+.side .who{margin:0;min-height:36px;width:36px;padding:0;border:0;background:transparent;color:var(--side-mut);font-size:16px}
+.side .who:hover{color:#fff;background:var(--side-on)}
+/* pages keep their reading width (880px), centred in the space right of the sidebar; home and reading use more */
+main{flex:1;min-width:0;max-width:none;margin:0;padding:26px 30px 80px;padding-inline:max(30px, calc((100vw - 236px - 880px) / 2))}
+main:has(>.htop){padding-inline:max(30px, calc((100vw - 236px - 1600px) / 2))}
+main:has(.rwrap){padding-inline:max(30px, calc((100vw - 236px - 1240px) / 2))}
+.hud{top:16px}
+.rwrap .passage{top:16px}
+@media (max-width:980px){
+  .app{flex-direction:column}
+  .side{width:auto;height:auto;position:sticky;top:0;flex-direction:row;align-items:center;gap:6px;padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top));overflow:visible}
+  .side .brand{padding:0 6px 0 0;font-size:0;gap:0}.side .brand .owl{width:34px;height:34px}
+  .navs{flex-direction:row;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;gap:2px}.navs::-webkit-scrollbar{display:none}
+  .nav{min-height:38px;padding:0 10px;font-size:14px;white-space:nowrap;gap:6px}.nav svg{width:16px;height:16px}
+  .side .grow,.tog,.mel>span{display:none}
+  .me{padding:0;background:none}.mel b{width:34px;height:34px}
+  main,main:has(>.htop),main:has(.rwrap){padding:18px 16px 80px}
+}
+@media (max-width:560px){ .nav span{display:none}.nav.on span{display:inline}.side .who{display:none} }
+/* home */
+.htop{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;margin:0 0 18px}
+.htop small{font-size:14px;color:var(--muted)}.htop h1{margin:0;font-size:28px;letter-spacing:-.01em}
+.hpills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--card);font-weight:600;font-size:14px}
+.hpill.fire svg{color:var(--fire)}.hpill svg{color:var(--gold)}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:0 0 18px}.span2{grid-column:span 2}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0 0 18px}
+.g3>.card,.g2>.card,.col>.card{margin:0;border-radius:28px;padding:20px}
+.col{display:flex;flex-direction:column;gap:18px;min-width:0}
+.h4{font-size:14px;font-weight:600;color:var(--muted)}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:6px 10px;flex-wrap:wrap;padding-bottom:6px}.ph b{font-size:17px}.ph>span:last-child{font-size:14px;color:var(--muted)}
+.hhero{background:var(--hero);color:#fff;border-radius:28px;padding:24px 28px;display:flex;align-items:center;gap:16px;position:relative;min-height:236px}
+.hhero .txt{display:flex;flex-direction:column;gap:10px;flex:1;min-width:0}
+.hhero .k{font-size:14px;font-weight:500;color:var(--hero-mut)}
+.hhero h2{margin:0;font-size:28px;line-height:1.18;text-wrap:balance;color:#fff}
+.hhero p{margin:0;color:var(--hero-sub);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.btns{display:flex;gap:10px;padding-top:6px;flex-wrap:wrap}
+.hhero .btn.primary{min-height:48px;padding:0 26px;font-size:16px;border-radius:14px}
+.hhero .ghost{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border:2px solid rgba(255,255,255,.45);border-radius:14px;color:#fff;text-decoration:none;font-weight:500}
+.hhero .ghost:hover{border-color:#fff}
+.hero-owl{position:relative;width:220px;height:240px;flex:none;margin:-28px -10px -30px 0}
+.hero-owl .owl3d{width:100%;height:100%}
+.o3bubble{position:absolute;top:2px;right:150px;z-index:2;background:#fff;color:#18211B;font-size:13px;font-weight:600;padding:7px 12px;border-radius:14px 14px 4px 14px;box-shadow:0 4px 14px rgba(0,0,0,.15);white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none}
+.o3bubble.show{opacity:1;transform:none;animation:o3hide .3s 4s forwards}
+@keyframes o3hide{to{opacity:0;transform:translateY(6px)}}
+html.noanim .o3bubble.show{animation:none}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.gauge .h4{align-self:flex-start}.gauge small{font-size:13px;color:var(--muted)}
+.plan{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;background:var(--row)}
+.item .t{flex:1;display:flex;flex-direction:column;min-width:0}.item .t span{font-weight:600}
+.item .t small{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item.done .t span{color:var(--muted);text-decoration:line-through}
+.hdot{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;color:var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.hdot.reading{color:var(--blue);background:color-mix(in srgb,var(--blue) 18%,transparent)}
+.hdot.vocab{color:var(--cta-deep);background:color-mix(in srgb,var(--cta) 22%,transparent)}
+.go{min-height:38px;padding:0 18px;border-radius:999px;background:var(--accent);color:var(--go-ink);font-weight:600;font-size:14px;border:0;display:inline-flex;align-items:center;text-decoration:none;flex:none}
+.go:hover{border:0;filter:brightness(1.08)}
+.rev{background:var(--rev);color:#fff;border-radius:22px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rev small{display:block;font-size:13px;color:#A9C7B4}.rev b{font-size:30px;line-height:1.1}.rev b span{font-size:15px;font-weight:500}
+.rev button,.rev a{min-height:40px;padding:0 16px;border-radius:12px;background:var(--cta);color:var(--cta-ink);font-weight:600;font-size:14px;border:0;text-decoration:none;display:inline-flex;align-items:center}
+.words{display:flex;flex-direction:column;gap:12px;flex-grow:1}
+.wchips{display:flex;flex-wrap:wrap;gap:8px}.wchips span{padding:6px 12px;border-radius:999px;background:var(--chip);font-size:14px}
+button.link{background:none;border:0;padding:0;min-height:0;color:var(--accent);font-weight:600;font-size:14px;justify-content:flex-start}
+.hskills,.hweek{display:flex;flex-direction:column;gap:14px}
+.hskill{display:flex;align-items:center;gap:12px;font-size:14px}.hskill b{width:60px;font-weight:600}
+.sbar{flex:1;height:10px;border-radius:6px;background:var(--track)}.sbar i{display:block;height:10px;border-radius:6px}
+.hskill span{min-width:76px;text-align:right;color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;align-items:end;height:76px}.week i{border-radius:8px;display:block}
+.hdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;font-size:12px;color:var(--muted);text-align:center}
+@media (max-width:980px){ .g3,.g2{grid-template-columns:minmax(0,1fr)}.span2{grid-column:auto} }
+@media (max-width:560px){
+  .hhero{flex-direction:column-reverse;align-items:stretch;padding:18px 20px}
+  .hero-owl{width:100%;height:200px;margin:-8px 0 -18px}
+  .o3bubble{right:auto;left:50%;transform:translate(-50%,6px)}.o3bubble.show{transform:translate(-50%,0)}
+  @keyframes o3hide{to{opacity:0}}
+  .hhero h2{font-size:23px}.htop h1{font-size:24px}
+}
+/* 3D owl slot: the PNG shows until the canvas is ready */
+.owl3d{position:relative;width:var(--o3);height:var(--o3);flex:none;display:grid;place-items:center}
+.owl3d>.owl{max-width:100%;max-height:100%;object-fit:contain;transition:opacity .3s}
+.owl3d .owl3dcv{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .4s}
+.owl3d.live>.owl{opacity:0}.owl3d.live .owl3dcv{opacity:1}
+.owl3d.live{cursor:pointer}
+.owl3d.fbo,.owl3d.lfbowl{width:calc(var(--o3) * 1.25);height:calc(var(--o3) * 1.35)}
+.lfb>.lfbowl+div{flex:1;min-width:160px}
+.lfb .owl3d.lfbowl,.fb .owl3d.fbo{width:84px;height:92px;margin:-14px 0 -14px -6px}
+@media (max-width:560px){ .lfb .owl3d.lfbowl,.fb .owl3d.fbo{width:70px;height:78px} }
 
 </style>
 </head>
 <body>
-<header>
-  <a class="brand" href="#/">YDS Hazırlık</a>
-  <button class="who" data-act="switch-profile" title="Kullanıcı değiştir"><span id="who"></span> ⇄</button>
-</header>
+<div class="app">
+<aside class="side" id="side">
+  <a class="brand" href="#/"><span id="brandowl"></span>YDS Hazırlık</a>
+  <nav class="navs" aria-label="Bölümler">
+    <a class="nav" data-r="" href="#/"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10z"/></svg><span>Bugün</span></a>
+    <a class="nav" data-r="vocab" href="#/vocab"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="4"/></svg><span>Kelime</span></a>
+    <a class="nav" data-r="grammar" href="#/grammar"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 5-10 5L2 7z"/><path d="M4 12l8 4 8-4v4l-8 4-8-4z"/></svg><span>Gramer</span></a>
+    <a class="nav" data-r="reading" href="#/reading"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5c3-1 7-1 10 1v15c-3-2-7-2-10-1z"/><path d="M22 5c-3-1-7-1-10 1v15c3-2 7-2 10-1z"/></svg><span>Okuma</span></a>
+    <a class="nav" data-r="yds" href="#/yds"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12a2 2 0 0 1 2 2v18l-8-4-8 4V4a2 2 0 0 1 2-2z"/></svg><span>YDS soruları</span></a>
+    <a class="nav" data-r="speak" href="#/speak"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 5z"/></svg><span>Konuşma</span></a>
+    <a class="nav" data-r="errors" href="#/errors"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><span>Hatalarım</span></a>
+  </nav>
+  <div class="grow"></div>
+  <button class="tog" data-act="theme-toggle" type="button"><span class="sw"><i></i></span><span id="togl">Koyu tema</span></button>
+  <div class="me"><a class="mel" href="#/profile" aria-label="Profil"><b id="meav"></b><span><span id="who"></span><small id="mesub"></small></span></a>
+    <button class="who" data-act="switch-profile" title="Kullanıcı değiştir" aria-label="Kullanıcı değiştir">⇄</button></div>
+</aside>
 <main id="main"></main>
+</div>
 <div id="toast"></div>
 <script>
 /*! @supabase/supabase-js 2.45.4 | MIT License | https://github.com/supabase/supabase-js | patched: no publicPath throw when inlined */
@@ -25569,7 +25707,7 @@ function viewMCQ(){
   return `<div class="sess-head"><span class="pill">${esc(S.title)}</span><span class="muted">${S.i+1}/${S.items.length}${S.testMode?' · test modu: cevaplar sonda':''}</span><a href="${S.back||'#/'}" class="muted" data-act="quit">Çık</a></div>
   ${it.passage?passageHtml(it.passage):''}
   <p class="small muted tapnote">Bilmediğin kelimeye dokun: Türkçesini gör, listene ekle.</p><p class="q">${tapText(it.q)}</p><div class="opts">${opts}</div>
-  ${fb?`<div class="fb ${S.results[S.results.length-1].ok?'ok':'bad'} withowl">${owlImg(S.results[S.results.length-1].ok?'cool':'support','',52)}<div><b>${S.results[S.results.length-1].ok?'Doğru.':'Yanlış.'}</b> ${esc(it.ex||'')}</div></div>
+  ${fb?`<div class="fb ${S.results[S.results.length-1].ok?'ok':'bad'} withowl">${owl3dSlot(S.results[S.results.length-1].ok?'ok':'no', S.results[S.results.length-1].ok?'cool':'support', 52, 'fb|'+fxScreenKey(), 'fbo')}<div><b>${S.results[S.results.length-1].ok?'Doğru.':'Yanlış.'}</b> ${esc(it.ex||'')}</div></div>
   <div class="optwords small"><span class="muted">Şıklardaki kelimeler:</span> ${it.order.map((orig,k)=>`<span class="ow"><b>${'ABCDE'[k]})</b> ${tapText(it.o[orig])}</span>`).join(' ')}</div>
   ${prevNote(it)}${needsExplain()?`<div class="card explain"><label><b>Kendine açıkla:</b> Doğru cevap neden bu, seninki neden değil? Kendi cümlelerinle yaz.<textarea id="expl" rows="2"></textarea></label></div>`:''}
   <button class="primary" id="vnext" data-act="mcq-next">Devam (Enter)</button>`:''}`;
@@ -25910,7 +26048,7 @@ function render(){
   const gate = !profiles.current ? 'profiles' : (!state.profile.onboarded || location.hash==='#/onboarding') ? 'onboarding' : null;
   document.body.classList.toggle('gate', !!gate);
   if(gate){ S=null; main.innerHTML = gate==='profiles' ? pageProfiles() : pageOnboarding(); return; }
-  document.querySelector('#who').textContent=state.profile.name;
+  sideUpdate();
   if(S){
     if(S.kind==='vocab') html=viewVocabSession();
     else if(S.kind==='lesson') html=viewLesson();
@@ -25924,7 +26062,7 @@ function render(){
       : h[0]==='reading'?pageReading() : h[0]==='yds'?pageBank() : h[0]==='errors'?pageErrors() : h[0]==='speak'?pageSpeak(h[1]) : h[0]==='progress'?pageProgress() : h[0]==='settings'?pageSettings()
       : h[0]==='level'?pageLevel() : h[0]==='methods'?pageMethods() : h[0]==='profile'?pageProfile() : pagePlan();
     const inProfile=['progress','settings','level','methods'].includes(h[0]);
-    if(inProfile || ['vocab','grammar','reading','yds','errors','profile','speak'].includes(h[0])) html=`<p class="crumb"><a href="#/">← Ana sayfa</a>${inProfile?' · <a href="#/profile">Profil</a>':''}${h[0]==='grammar'&&h[1]&&!h[2]?' · <a href="#/grammar">Gramer ağacı</a>':''}${h[0]==='vocab'&&h[1]?' · <a href="#/vocab">Kelime</a>':''}</p>`+html;
+    if(inProfile || ['vocab','grammar','reading','yds','errors','profile','speak'].includes(h[0])) html=`<p class="crumb"><a class="crhome" href="#/">← Ana sayfa</a>${inProfile?' · <a href="#/profile">Profil</a>':''}${h[0]==='grammar'&&h[1]&&!h[2]?' · <a href="#/grammar">Gramer ağacı</a>':''}${h[0]==='vocab'&&h[1]?' · <a href="#/vocab">Kelime</a>':''}</p>`+html;
     xpMark=totalXP();
   }
   main.innerHTML=html;
@@ -25984,6 +26122,19 @@ document.addEventListener('keydown', e=>{
 });
 window.addEventListener('hashchange', ()=>{ if(S && S.kind!=='summary') S=null; if(S && S.kind==='summary') S=null; render(); window.scrollTo(0,0); });
 
+
+// New site version: a tab left open keeps running old code, so the page checks for an update when it comes back into
+// view (and every 20 min). Outside a lesson or test it reloads at once; during one it waits for the next page change.
+(function watchVersion(){
+  if(!/^https?:/.test(location.protocol)) return;
+  let first=null, pending=false;
+  const stamp=r=>r.headers.get('etag')||r.headers.get('last-modified')||'';
+  async function check(){ try{ const r=await fetch(location.pathname, { method:'HEAD', cache:'no-store' }); const v=stamp(r); if(!v) return;
+    if(first===null){ first=v; return; } if(v!==first){ if(!S || S.kind==='summary') location.reload(); else pending=true; } }catch(e){} }
+  check(); setInterval(check, 20*60*1000);
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') check(); });
+  window.addEventListener('hashchange', ()=>{ if(pending) location.reload(); });
+})();
 
 // ============================================================
 // TAP-TO-LEARN READING (idea from LingQ): every word in a passage can be tapped to see its meaning,
@@ -26483,7 +26634,7 @@ function viewLesson(){
   }
   if(c.phase==='fb' && c.type!=='match' && c.type!=='intro'){
     const ans = ['en2tr','listen'].includes(c.type) ? shortTr(w.tr) : ['cloze','ctype'].includes(c.type) ? clozeParts(w, c).ans : w.w;
-    body+=`<div class="lfb ${c.ok?'ok':'bad'}">${owlImg(c.ok?'cool':'support','lfbowl',56)}<div><b>${c.ok?pickOne(['Harika!','Doğru!','Çok iyi!','Aynen böyle!']):'Doğru cevap:'}</b> ${c.ok?(c.typo?`Küçük yazım hatası: <b>${esc(ans)}</b>`:''):`<b>${esc(ans)}</b>`}
+    body+=`<div class="lfb ${c.ok?'ok':'bad'}">${owl3dSlot(c.ok?'ok':'no', c.ok?'cool':'support', 56, 'lfb|'+fxScreenKey(), 'lfbowl')}<div><b>${c.ok?pickOne(['Harika!','Doğru!','Çok iyi!','Aynen böyle!']):'Doğru cevap:'}</b> ${c.ok?(c.typo?`Küçük yazım hatası: <b>${esc(ans)}</b>`:''):`<b>${esc(ans)}</b>`}
       ${S.combo>=3&&c.ok?`<div class="small">${S.combo} doğru üst üste</div>`:''}<div class="small">${esc(w.w)} = ${esc(shortTr(w.tr))}</div></div>
       <button class="primary" id="lnext" data-act="l-next">${S.hearts<=0?'Bitir':'Devam'}</button></div>`;
   }
@@ -26566,6 +26717,7 @@ function fxScreenKey(){
 }
 function fxAfterRender(){
   syncMotionClass();
+  owl3dAfterRender();
   const main=document.querySelector('#main'); if(!main) return;
   const key=fxScreenKey(); if(key===fxKey) return;
   const depth = S ? 9 : (location.hash||'#/').split('/').filter(Boolean).length;
@@ -26709,6 +26861,105 @@ addActions({
 });
 // a button or link in the owl's bubble hides it (the session it starts would hide it anyway)
 document.addEventListener('click', e=>{ const a=e.target.closest('#peek [data-act], #peek a'); if(a && a.dataset.act!=='say') setTimeout(()=>peekHide(true), 0); });
+
+// ============================================================
+// 3D OWL — Ata's Meshy owl (assets/owl3d/owl-mascot.glb) with smooth animation clips.
+// One WebGL canvas moves between "slots": <div class="owl3d" data-owl3d="greet" data-key="..."> with the PNG owl inside.
+// The PNG stays visible until the 3D model is ready, and stays for good when WebGL, the files or "Animasyonlar" are off.
+// Files next to index.html: owl3d/three.min.js (r128), owl3d/GLTFLoader.js, owl3d/owl-mascot.glb (CDN fallback for the scripts).
+// Clips: idle blink greet celebrate support think focus sleep wake (see assets/owl3d/README.md).
+// ============================================================
+const OWL3D_BASE = 'owl3d/';
+const OWL3D_LOOPS = new Set(['idle','think','focus','sleep']), OWL3D_NOBLINK = new Set(['sleep','wake']);
+// moment -> [clip, clip to return to (none = keep looping)]
+const OWL3D_MOM = { greet:['greet','idle'], ok:['celebrate','idle'], no:['support','idle'], think:['think'], focus:['focus'], sleep:['sleep'], wake:['wake','idle'], idle:['idle'] };
+const O3 = { st:'off', key:null, host:null, cur:null, curName:'', blinkT:3, idleFor:0, slept:false, raf:0, last:0 };
+
+function owl3dSlot(moment, mood, size, key, cls=''){
+  return `<div class="owl3d ${cls}" data-owl3d="${moment}" data-key="${esc(String(key??moment))}" style="--o3:${size}px">${owlImg(mood,'',size)}</div>`;
+}
+function owl3dWanted(){
+  if(!motionOK()) return false;
+  if(O3.gl===undefined){ try{ const c=document.createElement('canvas'); O3.gl=!!(window.WebGLRenderingContext && (c.getContext('webgl')||c.getContext('experimental-webgl'))); }catch(e){ O3.gl=false; } }
+  return O3.gl;
+}
+function owl3dScript(src){ return new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+async function owl3dLoad(){
+  O3.st='loading';
+  try{
+    if(!window.THREE) await owl3dScript(OWL3D_BASE+'three.min.js').catch(()=>owl3dScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'));
+    if(!THREE.GLTFLoader) await owl3dScript(OWL3D_BASE+'GLTFLoader.js').catch(()=>owl3dScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js'));
+    let buf;
+    const emb=document.querySelector('#owl3d-glb');   // test copies embed the model as base64
+    if(emb){ const b=atob(emb.textContent.trim()); const u=new Uint8Array(b.length); for(let i=0;i<b.length;i++) u[i]=b.charCodeAt(i); buf=u.buffer; }
+    else { const r=await fetch(OWL3D_BASE+'owl-mascot.glb'); if(!r.ok) throw new Error('glb '+r.status); buf=await r.arrayBuffer(); }
+    const g=await new Promise((ok,no)=>new THREE.GLTFLoader().parse(buf,'',ok,no));
+    const r=new THREE.WebGLRenderer({ antialias:true, alpha:true }); r.setPixelRatio(Math.min(2,devicePixelRatio||1)); r.outputEncoding=THREE.sRGBEncoding;
+    const scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(30,1,0.1,50); cam.position.set(-0.8,1.2,4.5); cam.lookAt(0,0.98,0);
+    scene.add(new THREE.HemisphereLight(0xffffff,0x9fb8a6,1.15));
+    const k=new THREE.DirectionalLight(0xfff4e6,1.1); k.position.set(-2,4,5); scene.add(k);
+    const rim=new THREE.DirectionalLight(0xffc68a,0.7); rim.position.set(3,2,-3); scene.add(rim);
+    scene.add(g.scene); g.scene.traverse(o=>{ if(o.isMesh) o.frustumCulled=false; });
+    O3.mixer=new THREE.AnimationMixer(g.scene); O3.clips={}; g.animations.forEach(c=>O3.clips[c.name]=c);
+    O3.mixer.addEventListener('finished', e=>{ if(e.action===O3.cur && O3.then && O3.mixer.time-O3.at>=e.action.getClip().duration-0.1){ const t=O3.then; O3.then=null; owl3dPlay(t); } });
+    Object.assign(O3, { r, scene, cam, st:'ready' });
+    r.domElement.className='owl3dcv'; r.domElement.setAttribute('aria-hidden','true');
+    O3.ro=new ResizeObserver(owl3dSize);
+    owl3dAttach();
+  }catch(e){ O3.st='fail'; console.warn('3D baykuş yüklenemedi, resim kullanılıyor.', e); }
+}
+function owl3dPlay(n, then){
+  const c=O3.clips[n]; if(!c) return;
+  const a=O3.mixer.clipAction(c); a.reset(); a.setLoop(OWL3D_LOOPS.has(n)?THREE.LoopRepeat:THREE.LoopOnce, Infinity); a.clampWhenFinished=true; a.enabled=true;
+  if(O3.cur && O3.cur!==a) a.crossFadeFrom(O3.cur, 0.35, false);
+  a.play(); O3.cur=a; O3.curName=n; O3.then=then||null; O3.at=O3.mixer.time;   // a reused one-shot can report a stale 'finished'
+}
+// Play a moment on the visible 3D owl (no-op while it shows the PNG).
+function owl3dMoment(m){
+  if(O3.st!=='ready' || !O3.host) return;
+  const [c,then]=OWL3D_MOM[m]||OWL3D_MOM.idle; O3.slept=false; O3.idleFor=0; owl3dPlay(c, then);
+}
+function owl3dSize(){
+  if(!O3.host) return; const w=O3.host.clientWidth, h=O3.host.clientHeight; if(!w||!h) return;
+  O3.r.setSize(w,h,false); O3.cam.aspect=w/h; O3.cam.updateProjectionMatrix();
+}
+// Called after every render(): find the slot on the new page and move the canvas there.
+function owl3dAfterRender(){
+  const host=document.querySelector('#main .owl3d');
+  if(!host || !owl3dWanted()){ owl3dDetach(); return; }
+  if(O3.st==='off') owl3dLoad();
+  if(O3.st==='ready') owl3dAttach();
+}
+function owl3dAttach(){
+  const host=document.querySelector('#main .owl3d'); if(!host){ owl3dDetach(); return; }
+  const cv=O3.r.domElement;
+  if(O3.host!==host){ O3.ro.disconnect(); O3.host=host; host.appendChild(cv); O3.ro.observe(host); owl3dSize(); requestAnimationFrame(()=>host.classList.add('live')); }
+  const key=host.dataset.key;
+  if(key!==O3.key){ O3.key=key; const m=host.dataset.owl3d; if(!(m==='idle' && O3.curName==='idle')) owl3dMoment(m); }
+  if(!O3.raf){ O3.last=performance.now(); O3.raf=requestAnimationFrame(owl3dLoop); }
+}
+function owl3dDetach(){
+  if(O3.raf){ cancelAnimationFrame(O3.raf); O3.raf=0; }
+  if(O3.host){ O3.ro?.disconnect(); O3.r?.domElement.remove(); O3.host=null; O3.key=null; }
+}
+function owl3dLoop(t){
+  O3.raf=0; if(!O3.host || !O3.host.isConnected){ owl3dDetach(); return; }
+  const dt=Math.max(0,Math.min(0.05,(t-O3.last)/1000)); O3.last=t;   // rAF time can be older than performance.now()
+  if(!document.hidden){
+    O3.mixer.update(dt);
+    if(!OWL3D_NOBLINK.has(O3.curName)){ O3.blinkT-=dt; if(O3.blinkT<0){ const b=O3.mixer.clipAction(O3.clips.blink); b.reset(); b.setLoop(THREE.LoopOnce,1); b.play(); O3.blinkT=2.5+Math.random()*3; } }
+    // falls asleep after 45 s without input on a page that shows the big owl; any input wakes it
+    if(O3.host.classList.contains('big')){ O3.idleFor+=dt; if(O3.idleFor>45 && O3.curName!=='sleep'){ O3.slept=true; owl3dPlay('sleep'); } }
+    O3.r.render(O3.scene, O3.cam);
+  }
+  O3.raf=requestAnimationFrame(owl3dLoop);
+}
+['pointermove','keydown','scroll','touchstart'].forEach(ev=>addEventListener(ev,()=>{ O3.idleFor=0; if(O3.slept && O3.curName==='sleep'){ O3.slept=false; owl3dMoment('wake'); } },{ passive:true }));
+document.addEventListener('click', e=>{
+  const h=e.target.closest('.owl3d.live'); if(!h) return;
+  owl3dMoment(O3.curName==='sleep'?'wake':'greet');
+  const b=h.parentElement.querySelector('.o3bubble'); if(b){ b.classList.add('show'); clearTimeout(b._t); b._t=setTimeout(()=>b.classList.remove('show'), 2600); }
+});
 
 // ============================================================
 // GAME FEEL (v13) — per-answer feedback (+XP flying up, combo flame, shake on a wrong answer),
@@ -27850,38 +28101,86 @@ function areaTimeLine(k){
   if(p.mode!=='weekly') return m?`bugün ${m} dk`:'';
   const w=p.weekly[k]; return w.days.includes(todayDow()) ? `bugün ${m}/${w.min} dk` : 'bugün planında yok';
 }
+// C7 home (2026-10-20): hero with the 3D owl and the next step, YDS target gauge, today's plan, review box,
+// unknown words, skill levels, this week's minutes. The sidebar (shell.html, sideUpdate) replaces the old header and section chips.
+const AREA_ICO = {
+  vocab:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="4"/></svg>',
+  grammar:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l10 5-10 5L2 7z"/><path d="M4 12l8 4 8-4v4l-8 4-8-4z"/></svg>',
+  reading:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 5c3-1 7-1 10 1v15c-3-2-7-2-10-1z"/><path d="M22 5c-3-1-7-1-10 1v15c3-2 7-2 10-1z"/></svg>',
+  play:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+  done:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>',
+};
+function hTaskBtn(t, cls, label){
+  return t.act ? `<button class="${cls}" data-act="${t.act}" ${t.id?`data-id="${t.id}"`:''} ${t.timed?'data-timed="1"':''} ${t.type?`data-type="${t.type}"`:''}>${label}</button>`
+    : `<a class="${cls}" href="${t.href}">${label}</a>`;
+}
+const LV_PCT = { A1:12, A2:28, B1:46, B2:64, C1:82, C2:96 };
+function lvPct(s){ const m=String(s||'').match(/([ABC][12])([+−-]?)/); if(!m) return 0; return LV_PCT[m[1]] + (m[2]==='+'?6:m[2]?-6:0); }
+function homeSkills(){
+  const m=measured(), p=state.profile, L=p.levels||{}, r=readingMeasured();
+  const rows=[
+    ['Gramer', m.grammar?.level || L['Gramer'] || p.level, 'var(--accent)'],
+    ['Kelime', m.vocab?.level || L['Akademik kelime'] || L['Genel kelime'] || p.level, 'var(--blue)'],
+    ['Okuma', r ? RSTAGE[r.start] : null, 'var(--cta)'],
+  ];
+  return rows.map(([n,v,c])=>{ const pc = n==='Okuma' ? (r ? 20+r.start*20 : 0) : lvPct(v);
+    return `<div class="hskill"><b>${n}</b><div class="sbar">${pc?`<i style="width:${pc}%;background:${c}"></i>`:''}</div><span>${v?esc(String(v).replace(/ \(.*\)$/,'')):'Ölçülmedi'}</span></div>`; }).join('');
+}
+function homeGauge(){
+  const p=state.profile, tgt=p.target||75, ex=state.bank.exams.filter(e=>e.score!=null||e.est!=null), last=ex[ex.length-1];
+  const sc=last ? (last.score ?? last.est) : null, f=Math.max(0,Math.min(1,(sc??tgt)/100));
+  return `<div class="card gauge"><span class="h4">YDS hedefi</span>
+    <svg width="200" height="112" viewBox="0 0 200 112" role="img" aria-label="${sc!=null?`Son deneme ${sc} puan, hedef ${tgt}`:`Hedef ${tgt} puan`}">
+      <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="var(--track)" stroke-width="16" stroke-linecap="round"/>
+      <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="var(--accent)" stroke-width="16" stroke-linecap="round" pathLength="100" stroke-dasharray="${(f*100).toFixed(1)} 200" ${sc==null?'opacity=".35"':''}/>
+      <text x="100" y="94" text-anchor="middle" font-size="40" font-weight="700" fill="var(--text)" font-family="Lexend, sans-serif">${sc!=null?Math.round(sc):tgt}</text>
+    </svg>
+    <small>${sc!=null?`Son deneme (${last.official?'ÖSYM':'tahmini'}) · hedef ${tgt}`:`Hedef ${tgt}${p.minScore&&p.minScore!==tgt?` · en az ${p.minScore}`:''}${p.stretch?` · üst hedef ${p.stretch}`:''}`}</small>
+    <small>${sc!=null?`<a href="#/yds">Denemeler</a>`:`Tahmin için bir <a href="#/yds">tam deneme</a> çöz.`}</small></div>`;
+}
+function homeWeek(){
+  const p=state.profile, wk=weekDays(), td=today();
+  const mins=wk.map(d=>Math.round(Object.values(state.time[d]||{}).reduce((a,b)=>a+b,0)/60));
+  const plan=p.mode==='weekly' ? Object.keys(AREAS).reduce((a,k)=>a+p.weekly[k].days.length*p.weekly[k].min,0) : 0;
+  const tot=mins.reduce((a,b)=>a+b,0), mx=Math.max(30,...mins);
+  return `<div class="card hweek"><div class="ph"><span class="h4">Bu hafta</span><span>${plan?`${tot} / ${plan} dk`:`${tot} dk`}</span></div>
+    <div class="week">${mins.map((m,i)=>`<i title="${m} dk" style="height:${Math.max(8,Math.round(100*m/mx))}%;background:${wk[i]===td?'var(--cta)':m?'var(--accent)':'var(--track)'}"></i>`).join('')}</div>
+    <div class="hdays">${['Pt','Sa','Ça','Pe','Cu','Ct','Pz'].map(d=>`<span>${d}</span>`).join('')}</div></div>`;
+}
 function pagePlan(){
   const T=buildPlan().map(t=>({...t, area:t.area||taskArea(t)}));
-  const p=state.profile, xp=totalXP(), lv=levelOf(xp), q=dayQuests(today()), qn=q.filter(z=>z.done).length;
-  const color=(profiles.list.find(e=>e.id===profiles.current)||{}).color||COLORS[0];
-  const weekly=p.mode==='weekly', dow=todayDow();
-  const nodes=PLAN_AREAS.map(([k,letter,n],i)=>{
-    const ts=T.filter(t=>t.area===k), qz=q.find(z=>z.k===k), done=qz&&qz.done, off=weekly && !p.weekly[k].days.includes(dow);
-    const state_ = done?'done':'next';   // highlight (orange) comes from CSS :hover / :focus-within, see style.css .pnode
-    const sub = done ? `Günlük görev tamam · +${QUEST_XP} XP` : off ? 'Bugün planında yok' : (areaTimeLine(k)||qz?.title||'');
-    const body = ts.length ? ts.slice(0,3).map(t=>planLine(t)).join('')
-      : `<p class="small muted">Bekleyen görev yok. <a href="#/${k}">Bölüme git</a></p>`;
-    return `<li class="pnode ${state_} ${off?'off':''} ${i%2?'shift':''}">
-      <span class="dot" aria-hidden="true" style="--p:${Math.round(100*Math.min(1,(qz?.v||0)/(qz?.goal||1)))}"><i class="qring"></i>${done?ICO.check:letter}</span>
-      <div class="pbody"><div class="phead"><h3>${n}</h3><span class="small muted">${esc(sub)}</span></div>${body}</div></li>`;
-  }).join('');
-  return `<section class="mhead">
-    <div class="mrow"><a class="mav" href="#/profile" style="background:${color}" aria-label="Profil">${avatarFace(profiles.list.find(e=>e.id===profiles.current), p.name)}</a>
-      <div class="mwho"><b>${esc(p.name)} · ${rankOf(lv.L)}</b><span class="small muted">Seviye ${lv.L} · ${lv.cur} / ${lv.span} XP</span>
-        ${!p.levelChoice?`<span class="lvnote">Seviyeni henüz belirlemedin. <a href="#/level">Seviye testine gir</a> ya da <a href="#/profile">Profil</a> sayfasından testsiz devam et.</span>`:''}</div>
-      <a class="btn" href="#/profile">Profil</a></div>
-    <div class="bar xp">${`<span style="width:${Math.round(100*lv.cur/lv.span)}%"></span>`}</div>
-    <div class="mstats"><span class="fire f${streak()>=30?3:streak()>=7?2:streak()>=1?1:0}">${ICO.fire} ${streak()} gün seri</span><span class="gold">${ICO.star} ${stars().length} yıldız</span><span class="qbadge ${qn>0&&qn<3?'glow':qn===3?'full':''}">Görev ${qn} / 3</span></div>
-  </section>
-  ${owlSays(qn===3?'rest':qn?'goal':'welcome', qn===3?`Bugünün üç görevi tamam, ${esc(p.name)}! Biraz dinlenebilirsin.`:qn?`Güzel gidiyor! ${3-qn} görev kaldı.`:`${['Merhaba','Selam','Hoş geldin'][new Date().getDate()%3]}, ${esc(p.name)}! ${streak()?`${streak()} günlük serin var, devam edelim.`:'Bugün kelime dersiyle başlayalım mı?'}`, 'greet')}
-  ${tilesHtml()}
-  <h1 class="mtitle">Bugünün macerası</h1>
-  <p class="muted msub">${qn===3?`Sandık açıldı: +${QUEST_ALL_XP} XP kazandın.`:`Üç görevi bitir, sandık açılsın: +${QUEST_ALL_XP} XP`}</p>
-  <ol class="path">${nodes}</ol>
-  <div class="chest ${qn===3?'open':''}" data-n="${qn}" aria-label="Günlük sandık ${qn===3?'açıldı':'kapalı'}">
-    <svg viewBox="0 0 120 100" width="110" height="92" aria-hidden="true"><g class="lid"><path d="M14 44 Q14 16 60 16 Q106 16 106 44 Z" fill="#C9772B"/><rect x="14" y="38" width="92" height="10" fill="#8C4F18"/><rect x="54" y="34" width="12" height="16" rx="2" fill="#F2B705"/></g>
-    <rect x="14" y="48" width="92" height="44" rx="6" fill="#B3651F"/><rect x="14" y="48" width="92" height="8" fill="#8C4F18"/><rect x="52" y="54" width="16" height="16" rx="3" fill="#F2B705"/><circle class="gem" cx="60" cy="40" r="10" fill="#FFD84D"/></svg>
-    <div class="small muted">${qn===3?`Açıldı · +${QUEST_ALL_XP} XP`:`${3-qn} görev kaldı`}</div></div>`;
+  const p=state.profile, q=dayQuests(today()), qn=q.filter(z=>z.done).length, hr=new Date().getHours();
+  const next=T[0], rest=T.slice(1,5), pol=vocabPolicy();
+  const hello=`${hr<12?'Günaydın':hr<18?'İyi günler':'İyi akşamlar'}, ${esc(p.name)}`;
+  const say = qn===3 ? 'Bugünün görevleri tamam!' : qn ? `Güzel gidiyor, ${3-qn} görev kaldı.` : streak() ? `${streak()} günlük serin var!` : `Merhaba ${esc(p.name)}!`;
+  const mom = qn===3 ? 'idle' : 'greet';
+  const dot=(k)=>`<div class="hdot ${k}">${AREA_ICO[k]||AREA_ICO.grammar}</div>`;
+  const doneRows=q.filter(z=>z.done).map(z=>`<div class="item done">${dot('done')}<div class="t"><span>${esc(z.title)}</span><small>Günlük görev tamam · +${QUEST_XP} XP</small></div></div>`).join('');
+  const rows=rest.map(t=>`<div class="item">${dot(t.area)}<div class="t"><span>${esc(t.title)}</span><small>${esc(t.d)}</small></div>${hTaskBtn(t,'go','Çalış')}</div>`).join('');
+  const mine=state.mywords.slice(-12).reverse();
+  return `<div class="htop"><div><small>${new Date().toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'})}</small><h1>${hello}</h1></div>
+    <div class="hpills"><span class="hpill fire">${ICO.fire} ${streak()} günlük seri</span><span class="hpill">${ICO.star} ${totalXP()} XP</span></div></div>
+  ${!p.levelChoice?`<div class="card note small">Seviyeni henüz belirlemedin. <a href="#/level">Seviye testine gir</a> ya da <a href="#/profile">Profil</a> sayfasından testsiz devam et.</div>`:''}
+  <div class="g3">
+    <div class="hhero span2">
+      <div class="txt">${next?`<span class="k">Sıradaki adım · ${esc(next.ph||'Çalış')}</span><h2>${esc(next.title.replace(/^(Gramer|Kelime|Okuma): /,''))}</h2><p>${esc(next.d)}</p>
+        <div class="btns">${hTaskBtn(next,'btn primary hgo','Başla')}<a class="ghost" href="#/vocab">Kelime</a></div>`
+        :`<span class="k">Bugün</span><h2>Bekleyen görev yok</h2><p>Planındaki her şey tamam. İstersen bir bölüm seçip serbest çalış.</p><div class="btns"><a class="btn primary" href="#/vocab">Kelime çalış</a></div>`}</div>
+      <div class="hero-owl"><div class="o3bubble show">${say}</div>${owl3dSlot(mom, qn===3?'rest':'welcome', 200, 'home', 'big')}</div>
+    </div>
+    ${homeGauge()}
+  </div>
+  <div class="g3">
+    <div class="card plan span2"><div class="ph"><b>Bugünün planı</b><span>${qn} / 3 görev tamam · ${qn===3?`sandık açıldı +${QUEST_ALL_XP} XP`:`hepsi +${QUEST_ALL_XP} XP`}</span></div>
+      ${doneRows}${rows || (doneRows?'':'<p class="small muted">Bekleyen başka görev yok.</p>')}</div>
+    <div class="col">
+      <div class="rev"><div><small>Tekrar zamanı gelenler</small><b>${pol.due} <span>kelime</span></b></div>${pol.due+pol.newToday?`<button data-act="vocab-start">Tekrarla</button>`:`<a href="#/vocab">Kelime</a>`}</div>
+      <div class="card words"><div class="ph"><span class="h4">Bilmediğim kelimeler</span><a href="#/vocab/mine" class="small">Tümünü gör</a></div>
+        ${mine.length?`<div class="wchips">${mine.map(m=>`<span>${esc(m.w)}</span>`).join('')}</div><button class="link" data-act="lesson-start">Bu kelimelerle ders yap</button>`
+          :`<p class="small muted">Soru çözerken bilmediğin kelimeye dokun, buraya eklensin.</p>`}</div>
+    </div>
+  </div>
+  <div class="g2"><div class="card hskills"><span class="h4">Beceri düzeyleri</span>${homeSkills()}<a class="small" href="#/progress">Ayrıntılı ilerleme</a></div>${homeWeek()}</div>`;
 }
 
 addActions({
@@ -27896,6 +28195,23 @@ addActions({
     R.pset=(R.pset||'A')==='A'?'B':'A'; R.pstart=now(); R.placement=null; save(); startReading(placementTexts()[0].id, false); },
   'method-set':(d)=>{ state.profile.method=d.m; save(); toast(`Yöntem: ${METHODS[d.m].name}`); render(); },
   'method-run':(d)=>startMethodSet(d.id),
+});
+
+// ---------- sidebar (shell.html) ----------
+function themeIsDark(){ const t=getTheme(); if(t==='dark'||t==='light') return t==='dark'; try{ return matchMedia('(prefers-color-scheme: dark)').matches; }catch(e){ return false; } }
+function sideUpdate(){
+  const p=state.profile, lv=levelOf(totalXP()), entry=profiles.list.find(e=>e.id===profiles.current);
+  document.querySelector('#who').textContent=p.name;
+  document.querySelector('#mesub').textContent=`Seviye ${lv.L} · ${totalXP()} XP`;
+  const av=document.querySelector('#meav'); av.innerHTML=avatarFace(entry, p.name); av.style.background=(entry||{}).color||COLORS[0];
+  const bo=document.querySelector('#brandowl'); if(bo && !bo.firstChild) bo.innerHTML=owlImg('welcome','',40);
+  const r=(location.hash||'#/').slice(2).split('/')[0], key=['progress','settings','level','methods','profile'].includes(r)?'':r;
+  document.querySelectorAll('.side .nav').forEach(a=>{ const on=a.dataset.r===(S?'-':key); a.classList.toggle('on', on); on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'); });
+  const dark=themeIsDark(); document.querySelector('#togl').textContent='Koyu tema'; document.querySelector('.tog').classList.toggle('on', dark);
+  document.querySelector('.tog').setAttribute('aria-pressed', dark);
+}
+addActions({
+  'theme-toggle':()=>{ const t=themeIsDark()?'light':'dark'; try{ localStorage.setItem('yds-theme', t); }catch(e){} applyTheme(t); render(); },
 });
 
 // ============================================================
