@@ -26336,11 +26336,17 @@ function applyShape(word, shape){ const p=String(word).split(' '), w=p[0];
   p[0]=x; return p.join(' '); }
 function distractors(id, n, f, avoid, prefer){
   const w=word(id), k=posKey(w), seen=new Set([norm(f(w))]); const out=[];
-  // Not from this lesson's own words (that allowed answering by elimination); same part of speech and a similar frequency band first.
-  const inLesson=new Set(S.ids||[]), near=x=>!w.rank||!x.rank||Math.abs(x.rank-w.rank)<=1500;
-  const pool=shuffle(allWords()).filter(x=>x && !inLesson.has(x.id)).slice(0,1500);
-  const passes=[x=>posKey(x)===k && near(x), x=>posKey(x)===k, ()=>true]; if(prefer) passes.unshift(x=>prefer(x) && posKey(x)===k, prefer);
-  for(const pass of passes) for(const x of pool){ if(out.length>=n) break; if(!x || x.id===id || !x.tr || !pass(x)) continue; const v=f(x); if(!v || seen.has(norm(v)) || (avoid && avoid(v))) continue; seen.add(norm(v)); out.push(v); }
+  // Wrong options come first from words the learner has already studied (same part of speech), so the answer cannot be
+  // spotted as "the only word I know" and the sentence has to be understood. Then this lesson's other words, then the rest.
+  const inLesson=new Set(S&&S.ids||[]), near=x=>!w.rank||!x.rank||Math.abs(x.rank-w.rank)<=1500;
+  const studied=x=>x && !inLesson.has(x.id) && (state.lm[x.id] || state.vocab[x.id]?.last), lessonMate=x=>x && inLesson.has(x.id) && x.id!==id;
+  // a synonym or a word sharing a Turkish meaning could also fit the blank, so those are never wrong options
+  const trp=t=>String(t||'').toLocaleLowerCase('tr').split(/\s*[,;]\s*/).map(x=>x.replace(/\(.*?\)/g,'').trim()).filter(Boolean), myTr=new Set(trp(w.tr)), syn=new Set((w.syn||[]).map(norm));
+  const twin=x=>syn.has(norm(x.w)) || (x.syn||[]).some(y=>norm(y)===norm(w.w)) || trp(x.tr).some(y=>myTr.has(y));
+  const all=allWords(), pool=shuffle(all.filter(studied)).concat(shuffle(all.filter(lessonMate)), shuffle(all.filter(x=>x && !studied(x) && !inLesson.has(x.id))).slice(0,1500));
+  const passes=[x=>studied(x) && posKey(x)===k, x=>lessonMate(x) && posKey(x)===k, x=>!inLesson.has(x.id) && posKey(x)===k && near(x), x=>!inLesson.has(x.id) && posKey(x)===k, x=>!inLesson.has(x.id)];
+  if(prefer) passes.unshift(x=>prefer(x) && studied(x) && posKey(x)===k, x=>prefer(x) && posKey(x)===k, prefer);
+  for(const pass of passes) for(const x of pool){ if(out.length>=n) break; if(!x || x.id===id || !x.tr || twin(x) || !pass(x)) continue; const v=f(x); if(!v || seen.has(norm(v)) || (avoid && avoid(v))) continue; seen.add(norm(v)); out.push(v); }
   return out;
 }
 function plan(ids, isNew){
