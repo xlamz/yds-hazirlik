@@ -1,18 +1,18 @@
-# Owleno — Claude instructions
+# Owleno — Claude talimatları
 
-Read `docs/project-memory/README.md` at the start of work. This document contains shared project context; keep Claude-specific usage notes here.
+Çalışmaya başlamadan önce `docs/project-memory/README.md` dosyasını oku. Bu dosya, Claude ve Codex için ortak proje bağlamını içerir; Claude'a özgü kullanım notlarını burada tut.
 
-## Working rules
+## Çalışma kuralları
 
-- Explain the current state and plan before important changes. Wait for the user's approval before implementing them.
-- Do not commit, push, publish, change GitHub settings, or alter the database schema unless the user specifically authorizes that action.
-- Protect the live `owleno.com` application. Coordinate through Git branches and check the latest remote state before editing.
-- Inspect current code and deployment assumptions before editing. Do not claim tests passed unless they were run.
-- Explain technical choices in clear Turkish. State uncertainty and alternatives.
-- Never place credentials, API keys, or private user data in the repository.
+- Önemli bir değişiklikten önce mevcut durumu ve planı açıkla; uygulamaya geçmeden önce kullanıcının onayını bekle.
+- Kullanıcı açıkça yetki vermedikçe commit, push veya yayın yapma; GitHub ayarlarını değiştirme ve veritabanı şemasına dokunma.
+- Canlı `owleno.com` uygulamasını koru. Git dalları üzerinden eşgüdüm kur ve düzenleme öncesinde uzak depodaki son durumu kontrol et.
+- Düzenleme yapmadan önce mevcut kodu ve yayın varsayımlarını incele. Çalıştırılmayan testleri başarılıymış gibi anlatma.
+- Teknik tercihleri anlaşılır Türkçeyle açıkla; belirsizlikleri ve alternatifleri belirt.
+- Kimlik bilgilerini, API anahtarlarını veya özel kullanıcı verilerini depoya koyma.
 
-## Shared collaboration
+## Ortak çalışma
 
-- Use GitHub as the shared code hand-off point with Codex. Do not assume Codex can be invoked from this Claude session; use a reviewable branch, commit, or pull request for hand-off.
-- Keep durable decisions in `docs/project-memory/README.md` and record the date and rationale for material changes.
-- Ask the user to review a concrete diff before any commit or publication.
+- GitHub'ı Codex ile ortak kod aktarım noktası olarak kullan. Bu Claude oturumunun Codex'i doğrudan çalıştırabildiğini varsayma; incelemeye açık bir dal, commit veya pull request üzerinden aktarım yap.
+- Kalıcı kararları `docs/project-memory/README.md` dosyasında tut; önemli kararların tarihini ve gerekçesini yaz.
+- Commit veya yayın öncesinde kullanıcıya somut farkı incelemesi için sun.

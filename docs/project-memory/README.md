@@ -1,54 +1,54 @@
-# Owleno — shared project memory
+# Owleno — ortak proje hafızası
 
-Last reviewed: 2026-10-22
+Son gözden geçirme: 2026-10-22
 
-This is the durable, tool-neutral project context for Claude and Codex. Update it only after checking the repository and recording confirmed facts. Keep credentials and personal data out of this file.
+Bu belge, Claude ve Codex için araçlardan bağımsız kalıcı proje bağlamıdır. Yalnızca depoyu kontrol edip doğrulanmış bilgileri kaydettikten sonra güncelle. Kimlik bilgilerini ve kişisel verileri bu dosyaya yazma.
 
-## Product goal
+## Ürün hedefi
 
-Owleno is an English-learning platform for general English and exams such as YDS and YÖKDİL. The goal is a high-quality learning experience, a polished and professional interface, an original friendly owl mascot, and restrained gamification.
+Owleno; genel İngilizce öğrenimini ve YDS, YÖKDİL gibi sınavlara hazırlığı destekleyen bir eğitim platformudur. Hedef; öğrenme kalitesi yüksek, arayüzü profesyonel, özgün ve sevimli bir baykuş maskotu olan, oyunlaştırmayı ölçülü kullanan bir deneyim oluşturmaktır.
 
-## Product areas
+## Ürün alanları
 
-- Main application and learning journey
-- Graphic interface and user experience
-- Vocabulary, reading, grammar, and speaking
-- Infrastructure, security, and deployment
-- Testing and bug investigation
-- Copyright and content-source research
-- Shared development plan
+- Ana uygulama ve öğrenme akışı
+- Grafik arayüzü ve kullanıcı deneyimi
+- Kelime, okuma, gramer ve konuşma
+- Altyapı, güvenlik ve yayın süreci
+- Test ve hata inceleme
+- Telif ve içerik kaynağı araştırması
+- Ortak geliştirme planı
 
-## Current repository snapshot
+## Depodaki doğrulanmış mevcut durum
 
-- GitHub repository: `https://github.com/xlamz/yds-hazirlik`
-- The repository was observed as public on 2026-10-22.
-- The observed default branch is `claude/github-pages-z2a9cu`.
-- The public root contains `index.html`, `README.md`, `CNAME`, `robots.txt`, `owl3d/`, and `test/`.
-- `CNAME` contains `owleno.com`. The live domain displayed a YDS Hazırlık sign-in page when checked on 2026-10-22.
-- The README says the single-file app is generated from `yds-app/build.py`, but that source path was not present in the observed public branch. Confirm the canonical source before changing application code.
-- The local Codex checkout is on `codex/owleno`, tracking the observed remote default branch. It is a local branch; no push has been made.
+- GitHub deposu: `https://github.com/xlamz/yds-hazirlik`
+- Depo 2026-10-22 tarihinde herkese açık olarak görüntülendi.
+- Görüntülenen varsayılan dal: `claude/github-pages-z2a9cu`.
+- Deponun kökünde `index.html`, `README.md`, `CNAME`, `robots.txt`, `owl3d/` ve `test/` bulunuyor.
+- `CNAME` dosyasında `owleno.com` yazıyor. Canlı alan adı 2026-10-22 tarihinde YDS Hazırlık giriş sayfasını gösterdi.
+- README, tek dosyalı uygulamanın `yds-app/build.py` dosyasından üretildiğini söylüyor; incelenen herkese açık dalda bu kaynak yolu bulunamadı. Uygulama kodunu değiştirmeden önce asıl kaynağı doğrula.
+- Yerel Codex çalışma kopyası `codex/owleno` dalında. Bu çalışma dalı GitHub'a gönderildi; varsayılan dala push yapılmadı.
 
-## Collaboration and release safety
+## Ortak çalışma ve yayın güvenliği
 
-- GitHub is the common code hand-off point. Claude and Codex do not share a live working tree by default.
-- Check the current branch and remote commits before each coding session. Avoid parallel edits to the same files; use feature branches and review diffs.
-- Do not push to the default branch or alter GitHub Pages, DNS, Cloudflare, Supabase, or production settings without explicit user approval.
-- Treat `owleno.com` as live. Do not change production-facing files until the source/build path and release flow are understood.
-- This document is a starting snapshot, not proof of repository deployment configuration or Supabase state.
+- GitHub, Claude ile Codex arasındaki ortak kod aktarım noktasıdır. Claude ve Codex varsayılan olarak aynı canlı çalışma kopyasını paylaşmaz.
+- Her kodlama oturumundan önce mevcut dalı ve uzak commit'leri kontrol et. Aynı dosyalarda eşzamanlı düzenleme yapmaktan kaçın; özellik dalları ve incelemeye açık farklar kullan.
+- Kullanıcı açıkça onaylamadıkça varsayılan dala push yapma; GitHub Pages, DNS, Cloudflare, Supabase veya üretim ayarlarını değiştirme.
+- `owleno.com` canlı kabul edilmelidir. Kaynak/derleme yolu ve yayın akışı anlaşılmadan kullanıcıya dönük dosyalarda değişiklik yapma.
+- Bu belge başlangıç fotoğrafıdır; depo yayın ayarlarının veya Supabase durumunun kanıtı değildir.
 
-## Tools and assets
+## Araçlar ve varlıklar
 
-- The user has a Meshy AI subscription and plans to use it for the 3D owl mascot. The Meshy API/MCP credential and API-credit status have not been configured or verified.
-- Store credentials only in an approved local secret store or environment variable, never in Git or these shared notes.
+- Kullanıcının Meshy AI aboneliği var ve 3D baykuş maskotu için kullanmayı planlıyor. Meshy API/MCP kimlik bilgisi ve API kredi durumu yapılandırılmadı veya doğrulanmadı.
+- Kimlik bilgilerini yalnızca onaylı yerel gizli bilgi deposunda veya ortam değişkeninde sakla; Git'e ya da bu ortak notlara koyma.
 
-## Decision log
+## Karar günlüğü
 
-Append confirmed decisions with date, decision, rationale, and affected files/services. Keep unresolved questions in a separate “Open questions” section rather than recording guesses as facts.
+Doğrulanmış kararları tarih, karar, gerekçe ve etkilenen dosya/hizmet bilgileriyle ekle. Tahminleri gerçek gibi kaydetme; çözümlenmemiş konuları “Açık sorular” bölümünde tut.
 
-## Open questions
+## Açık sorular
 
-- Where is the canonical editable source (`yds-app/build.py` or another location), and how is `index.html` generated?
-- Which GitHub Pages workflow or branch rule currently publishes `owleno.com`?
-- Which Supabase services and schema are used by the live sign-in flow?
-- Is the user's Claude workspace Claude.ai Projects, Claude Code, or both? The available integration options differ.
-- Does the user want Meshy API access, which uses separate prepaid API credits, or only a manual asset workflow through the Meshy web app?
+- Asıl düzenlenebilir kaynak nerede (`yds-app/build.py` veya başka bir konum) ve `index.html` nasıl üretiliyor?
+- `owleno.com` sitesini şu anda hangi GitHub Pages iş akışı veya dal kuralı yayınlıyor?
+- Canlı giriş akışında hangi Supabase hizmetleri ve şema kullanılıyor?
+- Kullanıcı Claude.ai Projects mi, Claude Code mu, yoksa ikisini birden mi kullanıyor? Bağlantı seçenekleri buna göre değişir.
+- Kullanıcı Meshy API erişimi mi istiyor (ayrı ön ödemeli API kredisi kullanır), yoksa Meshy web uygulaması üzerinden elle varlık üretmek yeterli mi?
